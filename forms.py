@@ -8,4 +8,5 @@ class UserForm(Form):
     matricula = StringField('Matricula')
     nombre = StringField('Nombre')
     apaterno = StringField('Apaterno')
+    amaterno = StringField('Amaterno')
     email = EmailField('Email')
