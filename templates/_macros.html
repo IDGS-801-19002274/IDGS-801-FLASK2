@@ -17,10 +17,10 @@
 {%endmacro%}
 
 {%macro render_cajas(numero)%}
-<div class="form-group">
-  <label for="numero{{numero+1}}" class="control-label">Número {{numero+1}}:  </label>
-  <input type="number", name="numero{{numero+1}}" value=0>
-</div>
+<div>
+  <label class="w3-text-teal">Número {{numero+1}}:  </label>
+  <input type="number", name="numero{{numero+1}}" class="w3-input w3-border-0" value=0>
+</div> <br>
 {%endmacro%}
 
 {%macro render_simple_text(type, result)%}

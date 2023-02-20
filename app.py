@@ -19,7 +19,7 @@ def alumnos():
         Mat = registrar_Alumno.matricula.data
         Nom = registrar_Alumno.nombre.data
     
-    return render_template('alumnos.html', form = registrar_Alumno, mat=Mat, nom = Nom)
+    return render_template('alumnos.html', form = registrar_Alumno, mat=Mat, nom = Nom, name="Alumnos")
 
 @app.route('/cajas_dinamica', methods=['GET', 'POST'])
 def method_name(): 
