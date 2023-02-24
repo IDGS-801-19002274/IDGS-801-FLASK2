@@ -10,12 +10,12 @@
 {%macro render_field(field)%}
 <div>
   <div class="controls">
-    {{field.label}}
-    {{field(**kwargs)|safe}}
+    {{field.label(class_="w3-text-teal")}}
+    {{field(class_="w3-input w3-border-0", **kwargs)|safe}}
   </div>
 </div>
 {%if field.errors%}
-<ul>
+<ul class="w3-ul">
   {%for error in field.errors%}
   <li class="w3-text-red"> {{error}} </li>
   {%endfor%}

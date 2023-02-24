@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, make_response, flash
 
 import forms
 from JaleDelPrograma import Calculadora
@@ -45,6 +45,21 @@ def calcular():
                            nMenor = Calculadora.num_Menor(Numeros),
                            nMayor = Calculadora.num_Mayor(Numeros),
                            name = "Resultado de " + str(len(Numeros)) + " números")
+
+@app.route('/cookie', methods=['GET', 'POST'])
+def cookies():
+#    return 'HOLA'
+    reg_user = forms.LoginForm(request.form)
+    response = make_response(render_template('cookie.html', name = 'Cookie', form = reg_user))
+    
+    if request.method == 'POST' and reg_user.validate():
+        user = reg_user.username.data
+        passw = reg_user.password.data
+        datos = user + '@' + passw
+        response.set_cookie('datos_user', datos)
+        print(datos)
+    
+    return response
 
 if __name__ == "__main__":
     app.run(debug = True, port=3000)
