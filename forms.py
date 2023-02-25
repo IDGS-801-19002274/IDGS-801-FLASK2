@@ -27,3 +27,11 @@ class LoginForm(Form):
     password = StringField('contraseña',[
                             validators.DataRequired(message='El campo es requerido'),
                             validators.length(min=4, max=10, message='long de campo 4 min and 5 max')])
+
+class Languages(Form):
+    spanish = StringField('Español', [
+                            validators.DataRequired(message='El campo es requerido'),
+                            validators.length(min=2, max=10, message='El largo del texto tiene que estar entre 2 y 10')])
+    english = StringField('Inglés', [
+                            validators.DataRequired(message='El campo es requerido'),
+                            validators.length(min=1, max=10, message='El largo del texto tiene que estar entre 1 y 10')])

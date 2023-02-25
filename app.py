@@ -1,9 +1,12 @@
 from flask import Flask, request, render_template, redirect, make_response, flash
+from flask_wtf import CSRFProtect
 
 import forms
-from JaleDelPrograma import Calculadora
+from JaleDelPrograma import Calculadora, Traductor
 
 app = Flask(__name__)
+#app.config['SECRET_KEY'] = 'tu_clave_secreta_aqui'
+#csrf = CSRFProtect(app)
 
 @app.route('/')
 def mainn():
@@ -56,10 +59,32 @@ def cookies():
         user = reg_user.username.data
         passw = reg_user.password.data
         datos = user + '@' + passw
+        success_message = 'Bienvenido {}'.format(user)
         response.set_cookie('datos_user', datos)
-        print(datos)
+        flash(success_message)
     
     return response
 
+@app.route('/traductor', methods=['GET', 'POST'])
+def traductor():
+    reg_palabra = forms.Languages(request.form)
+    result = ''
+    word = ''
+    
+    if request.method == 'POST':
+        status = request.form.get('status')
+        if status == 'registrar' and reg_palabra.validate():
+            span = reg_palabra.spanish.data
+            en = reg_palabra.english.data
+            Traductor.guardar(span, en)
+        elif status == 'buscar':
+            word = request.form.get('word')
+            lan = request.form.get('select')
+            result = "Traducción: {}".format(Traductor.buscar_Palabra(word, lan))
+            
+    
+    return render_template('traductor.html', name='Traductor', form=reg_palabra, result = result, search = word)
+
 if __name__ == "__main__":
+    #csrf.init_app(app)
     app.run(debug = True, port=3000)

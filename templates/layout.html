@@ -21,11 +21,22 @@
             <span class="material-icons icon" style="font-size: 1.5rem;">group</span> ALUMNOS</a>
         <a href="/cookie" class="w3-bar-item w3-button w3-padding-large {{'active' if name == 'Cookie' else ''}}">
             <span class="material-icons icon" style="font-size: 1.5rem;">cookie</span> COOKIE</a>
+        <a href="/traductor" class="w3-bar-item w3-button w3-padding-large {{'active' if name == 'Traductor' else ''}}">
+            <span class="material-icons icon" style="font-size: 1.5rem;">translate</span> TRADUCTOR</a>
+        
+        {%with messages = get_flashed_messages()%}
+            {%if messages%}
+                {%for message in messages%}
+                <p class="w3-bar-item" style="margin-block-start: 0px; margin-block-end: 0px; padding-right: 3rem; text-transform: uppercase;">{{message}}</p>
+                {%endfor%}
+            {%endif%}
+        {%endwith%}
         <p class="w3-bar-item w3-right" style="margin-block-start: 0px; margin-block-end: 0px; padding-right: 3rem">
             <span class="material-icons icon" style="font-size: 1.5rem;">person</span> MIGUEL ANGEL LÓPEZ RENDÓN</p>
+        </div>
     </div>
 
-    <main class="w3-content" style="margin-top:46px">
+    <main class="w3-content" style="margin-top:70px">
         {%block content%}
         {%endblock%}
     </main>
